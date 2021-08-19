@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const expresshbs = require('express-handlebars');
-const methodOverride = require('method override');
+const methodOverride = require('method-override');
 const session = require('express-session');
 
 
@@ -19,7 +19,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Configuración de "handelbars (html)"
 app.engine('.hbs', expresshbs({
-    defaultLayout: main.hbs,
+    defaultLayout: 'main',
 
     // Configuración de ruta carpeta "layouts"
     layoutsDir: path.join(app.get('views'), 'layouts'),
@@ -56,6 +56,10 @@ app.use(session({
 
 //--------------------------------------------------------------------------------
 //ROUTES
+// Requerimos los archivos.js dentro de la carpeta routes para crear las rutas al servidor
+app.use(require('./routes/index'));
+app.use(require('./routes/notes'));
+app.use(require('./routes/users'));
 
 
 //--------------------------------------------------------------------------------
